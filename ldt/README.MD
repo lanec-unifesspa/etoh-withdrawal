@@ -1,0 +1,2 @@
+Datapackages for the project "Behavioral and biochemical effects of ethanol withdrawal in zebrafish". Data is produced by members from Laboratório de Neurociências e Comportamento "Frederico Guilherme Graeff", affiliated to Universidade Federal do Sul e Sudeste do Pará and Universidade do Estado do Pará.
+The package includes behavioral data using the [scototaxis protocol developed in our lab](https://wiki.zfin.org/pages/viewpage.action?pageId=98537687). Animals were video-recorded, and behavior was manually transcribed using X-Plo-Rat.
