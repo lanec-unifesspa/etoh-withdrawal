@@ -1,77 +1,76 @@
 {
-"name": "etoh-withdrawal",
-"title": "Ethanol withdrawal increases anxiety-like behavior in zebrafish: Meta-analysis and conceptual replication"
-"id": "http://dx.doi.org/ "//incluir doi
-"profile": "tabular-data-package"
-"description": "Dataset from accompanying paper (//doi) on the effects of ethanol withdrawal on zebrafish behavior in the light/dark test"
-contributors: [{
-"title": "Caio Maximino"
-"title": "Suianny Nayara Chaves"
-"title": "Monica Gomes Lima"
-}]
-//here we list the data files in this dataset
-"resources": [
-{
-"path": "data-ldt.csv",
-"schema": {
-"fields": [
-{
-//Subject number variable
-"name": "subj",
-"type": "string"
-},
-{
-//Group variable; strings represent control group ('1') or EtOH withdrawal group ('2')
-"name": "Gr",
-"type": "string"
-},
-{
-//Time on white (s)
-"name": "TB",
-"type": "numeric"
-},
-{
-//Preference index
-"name": "PI",
-"type": "numeric"
-},
-{
-//Entry duration (s)
-"name": "ED",
-"type": "numeric"
-},
-{
-//Erratic swimming (n)
-"name": "ES",
-"type": "numeric"
-},
-{
-//Freezing (s)
-"name": "Fr",
-"type": "numeric"
-},
-{
-//Risk assessment (n)
-"name": "RA",
-"type": "numeric"
-},
-{
-//Thigmotaxis (s)
-"name": "Th",
-"type": "numeric"
-},
-{
-//Transitions to white (n)
-"name": "Tr",
-"type": "numeric"
-},
-{
-//Squares crossed on white (n)
-"name": "SQ",
-"type": "numeric"
-}
-]
-}
-}
-]
+   "name":"etoh-withdrawal",
+   "title":"Ethanol withdrawal increases anxiety-like behavior in zebrafish: Meta-analysis and conceptual replication",
+   "id":"http://dx.doi.org/ ",
+   "profile":"tabular-data-package",
+   "description":"Dataset from accompanying paper on the effects of ethanol withdrawal on zebrafish behavior in the light/dark test",
+   "contributors":[
+      {
+         "title":"Caio Maximino"         "title":"Suianny Nayara Chaves"         "title":"Monica Gomes Lima"
+      }
+   ],
+   "resources":[
+      {
+         "path":"data-ldt.csv",
+         "schema":{
+            "fields":[
+               {
+                  "description":"Subject number variable",
+                  "name":"subj",
+                  "type":"string"
+               },
+               {
+                  "description":"Group variable; strings represent control group ('1') or EtOH withdrawal group ('2')",
+                  "name":"Gr",
+                  "type":"string"
+               },
+               {
+                  "description":"Time on white (s)",
+                  "name":"TB",
+                  "type":"numeric"
+               },
+               {
+                  "description":"Preference index",
+                  "name":"PI",
+                  "type":"numeric"
+               },
+               {
+                  "description":"Entry duration (s)",
+                  "name":"ED",
+                  "type":"numeric"
+               },
+               {
+                  "description":"Erratic swimming (n)",
+                  "name":"ES",
+                  "type":"numeric"
+               },
+               {
+                  "description":"Freezing (s)",
+                  "name":"Fr",
+                  "type":"numeric"
+               },
+               {
+                  "description":"Risk assessment (n)",
+                  "name":"RA",
+                  "type":"numeric"
+               },
+               {
+                  "description":"Thigmotaxis (s)",
+                  "name":"Th",
+                  "type":"numeric"
+               },
+               {
+                  "description":"Transitions to white (n)",
+                  "name":"Tr",
+                  "type":"numeric"
+               },
+               {
+                  "description":"Squares crossed on white (n)",
+                  "name":"SQ",
+                  "type":"numeric"
+               }
+            ]
+         }
+      }
+   ]
 }
