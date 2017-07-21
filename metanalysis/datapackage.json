@@ -1,0 +1,91 @@
+{
+   "name":"etoh-withdrawal-metanalysis",
+   "title":"Ethanol withdrawal increases anxiety-like behavior in zebrafish: Meta-analysis and conceptual replication",
+   "id":"http://dx.doi.org/ ",
+   "profile":"tabular-data-package",
+   "description":"Dataset from accompanying paper on meta-analysis of ethanol withdrawal effects on zebrafish defensive behavior",
+   "contributors":[
+      {
+         "title":"Caio Maximino",         "title":"Suianny Nayara Chaves",         "title":"Monica Gomes Lima"
+      }
+   ],
+   "resources":[
+      {
+         "path":"etoh-withdrawal-metanalysis.csv",
+         "schema":{
+            "fields":[
+               {
+                  "description":"Author and date",
+                  "name":"study",
+                  "type":"string"
+               },
+               {
+                  "description":"Mean value for control group",
+                  "name":"mctrl",
+                  "type":"string"
+               },
+               {
+                  "description":"Mean value for withdrawal group",
+                  "name":"mtrat",
+                  "type":"numeric"
+               },
+               {
+                  "description":"Standard deviation for control group",
+                  "name":"sdctrl",
+                  "type":"numeric"
+               },
+               {
+                  "description":"Standard deviation for withdrawal group",
+                  "name":"sdtrat",
+                  "type":"numeric"
+               },
+               {
+                  "description":"Number of subjects in control group",
+                  "name":"nctrl",
+                  "type":"numeric"
+               },
+               {
+                  "description":"Number of subjects in withdrawal group",
+                  "name":"ntrat",
+                  "type":"numeric"
+               },
+               {
+                  "description":"Behavioral test",
+                  "name":"teste",
+                  "type":"string"
+               },
+               {
+                  "description":"Ethanol concentration during exposure, in %",
+                  "name":"conc",
+                  "type":"numeric"
+               },
+               {
+                  "description":"Duration of exposure to ethanol, in days",
+                  "name":"t.trat",
+                  "type":"numeric"
+               },
+               {
+                  "description":"Duration of ethanol withdrawal, in hours",
+                  "name":"t.abst",
+                  "type":"numeric"
+               },
+               {
+                  "description":"Zebrafish strain",
+                  "name":"strain",
+                  "type":"string"
+               },
+               {
+                  "description":"Power, calculated post-hoc",
+                  "name":"power",
+                  "type":"numeric"
+               }
+            {
+         "path":"protocol-etoh-withdrawal.pdf"
+         "title":"Pre-registered protocol for the metanalysis"
+         "format":"pdf"
+            }
+            ]
+         }
+      }
+   ]
+}
