@@ -1,0 +1,37 @@
+{
+   "name":"teste.csv",
+   "title":"Ethanol withdrawal increases anxiety-like behavior in zebrafish: Meta-analysis and conceptual replication",
+   "id":"http://dx.doi.org/ ",
+   "profile":"tabular-data-package",
+   "description":"Dataset from accompanying paper on the effects of ethanol withdrawal on zebrafish catalase activity on the brain and head kidney",
+   "contributors":[
+      {
+         "title":"Caio Maximino",         "title":"Gabriel Rocha Felicio",         "title":"Monica Gomes Lima"
+      }
+   ],
+   "resources":[
+      {
+         "path":"teste.csv",
+         "schema":{
+            "fields":[
+               {
+                  "description":"Group variable",
+                  "name":"Group",
+                  "type":"string"
+               },
+               {
+                  "description":"CAT activity on brain (U mg protein)",
+                  "name":"Brain",
+                  "type":"numeric"
+               },
+               {
+                  "description":"CAT activity on head kidney (U mg protein)",
+                  "name":"Head_kidney",
+                  "type":"numeric"
+               },
+              
+            ]
+         }
+      }
+   ]
+}
