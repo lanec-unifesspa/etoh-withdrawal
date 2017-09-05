@@ -3,6 +3,7 @@ Datasets represent average catalase activities, determined following the Aebi (1
 Datasets include analytic validation assays, as well as experimental data on brains and head kidneys.
 
 Includes the following files:
-* datapackage.json Frictionless Data Specification for the data file
-* teste.csv Data file
-* etoh-withdrawal-catalase-notebook.Rmd R Markdown file with code for reproducible statistical analysis and figures
+* datapackage.json - Frictionless Data Specification for the data file
+* teste.csv - Data file
+* etoh-withdrawal-catalase-notebook.Rmd - R Markdown file with code for reproducible statistical analysis and figures
+* etoh-withdrawal-catalase-notebook.md - The same, but as a GitHub Document
