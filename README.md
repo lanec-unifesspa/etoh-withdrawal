@@ -4,4 +4,4 @@ The package will include primary data for a behavioral experiment on the effects
 
 [![DOI](https://zenodo.org/badge/95811139.svg)](https://zenodo.org/badge/latestdoi/95811139)
 
-The data is made available under the Open Database License: http://opendatacommons.org/licenses/odbl/1.0/. Any rights in individual contents of the database are licensed under the Database Contents License: http://opendatacommons.org/licenses/dbcl/1.0/
+The data is made available under the Public Domain Dedication and License v1.0 whose full text can be found at: http://www.opendatacommons.org/licenses/pddl/1.0/
