@@ -1,0 +1,1 @@
+Behavioral data from the in vivo pilocarpine-induced seizure experiment. Datasets represent latencies to reach Score IV seizures, organized as survival objects. In the dataset, 'start' refers to the beggining of the experiment (i.e., time 0), while 'stop' refers to the onset of the seizure event.
