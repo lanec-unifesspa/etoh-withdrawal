@@ -32,7 +32,7 @@ if(!require(RCurl)){
 
 Load data from github and inspect it:
 ```{r}
-x <- getURL("https://raw.githubusercontent.com/lanec-unifesspa/etoh-withdrawal/master/catalase/teste.csv")
+x <- getURL("https://raw.githubusercontent.com/lanec-unifesspa/etoh-withdrawal/master/catalase/etoh-withdrawal-catalase.csv")
 y <- read.csv(text = x)
 y$Group <- as.factor(y$Group)
 View(y)
