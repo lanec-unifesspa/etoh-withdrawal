@@ -1,0 +1,47 @@
+{
+   "name":"latenciestoIV.csv",
+   "title":"Behavioral and biochemical effects of ethanol withdrawal in zebrafish",
+   "id":"http://dx.doi.org/ ",
+   "profile":"tabular-data-package",
+   "description":"Dataset from accompanying paper on the effects of ethanol withdrawal on zebrafish behavior in the light/dark test, pilocarpine-induced seizure, and catalase activity in brain and head kidney",
+   "contributors":[
+      {
+         "title":"Caio Maximino",         "title":"Suianny Nayara Chaves",         "title":"Monica Gomes Lima",          "title":"Gabriel Rocha Felício"
+      }
+   ],
+    "licenses": [{
+    "name": "ODC-PDDL-1.0",
+    "path": "http://opendatacommons.org/licenses/pddl/",
+    "title": "Open Data Commons Public Domain Dedication and License v1.0"
+  }]
+   "resources":[
+      {
+         "path":"https://raw.githubusercontent.com/lanec-unifesspa/etoh-withdrawal/master/seizure/latenciestoIV.csv",
+         "schema":{
+            "fields":[
+               {
+                  "description":"Group variable; strings represent control group ('CTRL') or EtOH withdrawal group ('WD')",
+                  "name":"Gr",
+                  "type":"string"
+               },
+               {
+                  "description":"Time at beggining of experiment",
+                  "name":"start",
+                  "type":"numeric"
+               },
+               {
+                  "description":"Time of score onset (s)",
+                  "name":"stop",
+                  "type":"numeric"
+               },
+               {
+                  "description":"Whether or not a seizure event took place",
+                  "name":"seizure",
+                  "type":"numeric"
+               },
+               }
+            ]
+         }
+      }
+   ]
+}
