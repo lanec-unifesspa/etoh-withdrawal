@@ -530,21 +530,21 @@ permres
 
     ## 
     ## Test of Moderators (coefficient(s) 2:10): 
-    ## QM(df = 9) = 22.7784, p-val* = 0.0640
+    ## QM(df = 9) = 22.7784, p-val* = 0.0620
     ## 
     ## Model Results:
     ## 
     ##             estimate      se     zval   pval*    ci.lb    ci.ub    
-    ## intrcpt      -0.2899  0.6292  -0.4608  0.7100  -1.5230   0.9432    
-    ## testeNTT      0.8838  0.4950   1.7854  0.1000  -0.0864   1.8540   .
-    ## testePAv      0.4273  0.8655   0.4938  0.6390  -1.2690   2.1237    
-    ## testeShoal   -0.5890  0.7768  -0.7582  0.4500  -2.1114   0.9334    
-    ## strainBSF    -0.2586  0.6579  -0.3930  0.7020  -1.5481   1.0309    
-    ## strainSF      1.0435  0.8051   1.2961  0.2340  -0.5345   2.6214    
+    ## intrcpt      -0.2899  0.6292  -0.4608  0.6720  -1.5230   0.9432    
+    ## testeNTT      0.8838  0.4950   1.7854  0.0740  -0.0864   1.8540   .
+    ## testePAv      0.4273  0.8655   0.4938  0.6210  -1.2690   2.1237    
+    ## testeShoal   -0.5890  0.7768  -0.7582  0.4330  -2.1114   0.9334    
+    ## strainBSF    -0.2586  0.6579  -0.3930  0.7030  -1.5481   1.0309    
+    ## strainSF      1.0435  0.8051   1.2961  0.1900  -0.5345   2.6214    
     ## strainWT     -1.8813  0.5245  -3.5868  0.0030  -2.9093  -0.8533  **
-    ## conc          0.6865  0.2704   2.5388  0.0230   0.1565   1.2165   *
-    ## t.trat       -0.0392  0.0362  -1.0834  0.2880  -0.1102   0.0317    
-    ## t.abst        0.0011  0.0014   0.7695  0.4400  -0.0017   0.0038    
+    ## conc          0.6865  0.2704   2.5388  0.0210   0.1565   1.2165   *
+    ## t.trat       -0.0392  0.0362  -1.0834  0.2800  -0.1102   0.0317    
+    ## t.abst        0.0011  0.0014   0.7695  0.4510  -0.0017   0.0038    
     ## 
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -807,13 +807,43 @@ funnel(res.mod1, level=c(90, 95, 99), shade=c("white", "gray", "darkgray"), refl
 
 ![](etoh-withdrawal-metanalysis-notebook_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-14-1.png)
 
+Meta-analytic scatterplot of SMD vs. concentration (Figure 1F); based on <http://www.metafor-project.org/doku.php/plots:meta_analytic_scatterplot>
+
+``` r
+res.mod3 <- rma(yi, vi, mods = ~ conc, data = mod1, slab=paste(study))
+preds.conc <- predict(res.mod3)
+wi    <- 1/sqrt(mod1$vi)
+size  <- 0.5 + 3.0 * (wi - min(wi))/(max(wi) - min(wi))
+plot(mod1$conc, mod1$yi, pch=19, cex=size, xlab="[EtOH] (%)", ylab="SMD", las=1, bty="l")
+lines(preds.conc$pred)
+lines(preds.conc$ci.lb, lty = "dashed")
+lines(preds.conc$ci.ub, lty = "dashed")
+abline(h=0, lty="dotted")
+```
+
+![](etoh-withdrawal-metanalysis-notebook_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-15-1.png)
+
+Meta-analytic scatterplot of SMD vs. concentration (Figure 1F); based on <http://www.metafor-project.org/doku.php/plots:meta_analytic_scatterplot>
+
+``` r
+res.mod4 <- rma(yi, vi, mods = ~ t.trat, data = mod1, slab=paste(study))
+preds.t.trat <- predict(res.mod4)
+plot(mod1$t.trat, mod1$yi, pch=19, cex=size, xlab="Exposure duration (days)", ylab="SMD", las=1, bty="l")
+lines(preds.t.trat$pred)
+lines(preds.t.trat$ci.lb, lty = "dashed")
+lines(preds.t.trat$ci.ub, lty = "dashed")
+abline(h=0, lty="dotted")
+```
+
+![](etoh-withdrawal-metanalysis-notebook_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-16-1.png)
+
 Fit loess line to plot of power vs. SMD (Figure S2)
 
 ``` r
 ggplot(mod1, aes(power, abs(yi))) + geom_point() + geom_smooth(formula = y ~ x, method="loess", fullrange = FALSE) + labs(y = "Modulus of SMD", x = "Observed power")
 ```
 
-![](etoh-withdrawal-metanalysis-notebook_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-15-1.png)
+![](etoh-withdrawal-metanalysis-notebook_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-17-1.png)
 
 ``` r
 summary(gam(abs(mod1$yi) ~ mod1$power))
