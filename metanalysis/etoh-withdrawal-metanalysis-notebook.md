@@ -31,6 +31,28 @@ if(!require(RCurl)){
 
     ## Loading required package: bitops
 
+``` r
+if(!require(ggplot2)){
+    install.packages("ggplot2")
+    library(ggplot2)
+}
+```
+
+    ## Loading required package: ggplot2
+
+``` r
+if(!require(mgcv)){
+    install.packages("mgcv")
+    library(mgcv)
+}
+```
+
+    ## Loading required package: mgcv
+
+    ## Loading required package: nlme
+
+    ## This is mgcv 1.8-22. For overview type 'help("mgcv-package")'.
+
 Load data from github and inspect it:
 
 ``` r
@@ -64,71 +86,99 @@ mod1
     ## 12 12 Pittman & Ichikawa, 2013  23.04200   0.000000 32.463942  34.6301027
     ## 13 13 Pittman & Ichikawa, 2013  32.68600   0.000000 58.334536  59.3559517
     ## 14 14      Müller et al., 2017   4.78800   3.737000  1.086116   0.5147737
-    ## 15 15      Mathur et al., 2011 188.23590 275.572000 75.957772   9.5930000
+    ## 15 15      Mathur et al., 2011 188.23590  27.557200 75.957772   9.5930000
     ## 16 16      Mathur et al., 2011  12.42394  12.492000 10.456398   6.0570000
     ## 17 17       Benneh et al. 2017  11.57780 122.175000 34.682566 119.1187018
     ## 18 18       Benneh et al. 2017  11.57780  50.533000 34.682566  73.5755711
     ## 19 19       Benneh et al. 2017  10.93820 115.139000 30.342054  40.0479775
     ## 20 20       Benneh et al. 2017  10.93820 131.770000 30.342054  62.9318972
     ## 21 21       Dewari et al, 2016  56.20900  56.209000 27.434640  24.7959635
-    ##    nctrl ntrat teste conc t.trat t.abst strain      power      yi     vi
-    ## 1     15    15   LDT 0.20     21     48    BSF 0.86296091 -1.0849 0.1529
-    ## 2     14    14   NTT 0.50     22      2     AB 0.05504715 -0.0769 0.1430
-    ## 3      6    12   NTT 1.00      8     48     AB 0.12644115 -0.2975 0.2525
-    ## 4      6    12   LDT 1.00      8     48     AB 0.05026356 -0.0168 0.2500
-    ## 5     10    10   NTT 3.00     14     48     WT 0.77767486  1.1668 0.2340
-    ## 6      8    14   NTT 0.30      7     12    BSF 0.28261670  0.5624 0.2036
-    ## 7     14    13   PAv 0.25     22      2     WT 0.99998847 -2.2976 0.2461
-    ## 8     14    14   PAv 0.50     22      2     AB 0.08747571 -0.2078 0.1436
-    ## 9     14    14   PAv 0.50     22      2     SF 0.17259247  0.3707 0.1453
-    ## 10    14    14 Shoal 0.50     22      2     AB 0.95088072 -1.3259 0.1743
-    ## 11    14    14 Shoal 0.50     22      2     SF 0.05321236 -0.0614 0.1429
-    ## 12    10    10   NTT 3.00     14     48     WT 0.33568985  0.6574 0.2108
-    ## 13    10    10   LDT 3.00     14     48     WT 0.23707000  0.5319 0.2071
-    ## 14     8     8 Shoal 1.00      8     24    BSF 0.99999976  1.1690 0.2927
-    ## 15     6    12   NTT 1.00      8    144     AB 0.97679601 -1.9251 0.3529
-    ## 16     6    12   LDT 1.00      8    168     AB 0.05004361 -0.0084 0.2500
-    ## 17    15    30   NTT 0.50      8     96     WT 0.05004343 -1.0887 0.1132
-    ## 18    15    30   NTT 0.50      8    192     WT 0.87618800 -0.6019 0.1040
-    ## 19    10    20   LDT 0.50      8     96     WT 0.06630844 -2.7249 0.2737
-    ## 20    10    20   LDT 0.50      8    192     WT 0.16875720 -2.1523 0.2272
-    ## 21    13    14   NTT 0.50     63   1512     AB 0.02500143  0.0000 0.1484
+    ##    nctrl ntrat teste conc t.trat t.abst strain      power RoB Multiply
+    ## 1     15    15   LDT 0.20     21     48    BSF 0.86296091   8        1
+    ## 2     14    14   NTT 0.50     22      2     AB 0.05504715  14        1
+    ## 3      6    12   NTT 1.00      8     48     AB 0.12644115  12        1
+    ## 4      6    12   LDT 1.00      8     48     AB 0.05026356  12        1
+    ## 5     10    10   NTT 3.00     14     48     WT 0.77767486  12       -1
+    ## 6      8    14   NTT 0.30      7     12    BSF 0.28261670  18        1
+    ## 7     14    13   PAv 0.25     22      2     WT 0.99998847  16        1
+    ## 8     14    14   PAv 0.50     22      2     AB 0.08747571  16        1
+    ## 9     14    14   PAv 0.50     22      2     SF 0.17259247  16        1
+    ## 10    14    14 Shoal 0.50     22      2     AB 0.95088072  16        1
+    ## 11    14    14 Shoal 0.50     22      2     SF 0.05321236  16        1
+    ## 12    10    10   NTT 3.00     14     48     WT 0.33568985   8        1
+    ## 13    10    10   LDT 3.00     14     48     WT 0.23707000   8        1
+    ## 14     8     8 Shoal 1.00      8     24    BSF 0.99999976  11       -1
+    ## 15     6    12   NTT 1.00      8    144     AB 0.97679601  12        1
+    ## 16     6    12   LDT 1.00      8    168     AB 0.05004361  12        1
+    ## 17    15    30   NTT 0.50      8     96     WT 0.05004343  14        1
+    ## 18    15    30   NTT 0.50      8    192     WT 0.87618800  14        1
+    ## 19    10    20   LDT 0.50      8     96     WT 0.06630844  14        1
+    ## 20    10    20   LDT 0.50      8    192     WT 0.16875720  14        1
+    ## 21    13    14   NTT 0.50     63   1512     AB 0.02500143  16        1
+    ##         yi     vi
+    ## 1  -1.0849 0.1529
+    ## 2  -0.0769 0.1430
+    ## 3  -0.2975 0.2525
+    ## 4  -0.0168 0.2500
+    ## 5   1.1668 0.2340
+    ## 6   0.5624 0.2036
+    ## 7  -2.2976 0.2461
+    ## 8  -0.2078 0.1436
+    ## 9   0.3707 0.1453
+    ## 10 -1.3259 0.1743
+    ## 11 -0.0614 0.1429
+    ## 12  0.6574 0.2108
+    ## 13  0.5319 0.2071
+    ## 14  1.1690 0.2927
+    ## 15  3.5418 0.5985
+    ## 16 -0.0084 0.2500
+    ## 17 -1.0887 0.1132
+    ## 18 -0.6019 0.1040
+    ## 19 -2.7249 0.2737
+    ## 20 -2.1523 0.2272
+    ## 21  0.0000 0.1484
+
+Correct direction of effect
+
+``` r
+mod1$yi <- mod1$yi * mod1$Multiply
+```
 
 Fit a mixed-effects model on the calculated SMDs
 
 ``` r
-res.mod1 <- rma(yi, vi, mods = ~ teste + conc + t.trat + t.abst + strain, data = mod1, slab=paste(study))
+res.mod1 <- rma(yi, vi, mods = ~ teste + strain + conc + t.trat + t.abst, data = mod1, slab=paste(study))
 res.mod1
 ```
 
     ## 
     ## Mixed-Effects Model (k = 21; tau^2 estimator: REML)
     ## 
-    ## tau^2 (estimated amount of residual heterogeneity):     0.3571 (SE = 0.2389)
-    ## tau (square root of estimated tau^2 value):             0.5976
-    ## I^2 (residual heterogeneity / unaccounted variability): 64.64%
-    ## H^2 (unaccounted variability / sampling variability):   2.83
-    ## R^2 (amount of heterogeneity accounted for):            63.51%
+    ## tau^2 (estimated amount of residual heterogeneity):     0.6221 (SE = 0.3568)
+    ## tau (square root of estimated tau^2 value):             0.7887
+    ## I^2 (residual heterogeneity / unaccounted variability): 75.72%
+    ## H^2 (unaccounted variability / sampling variability):   4.12
+    ## R^2 (amount of heterogeneity accounted for):            48.29%
     ## 
     ## Test for Residual Heterogeneity: 
-    ## QE(df = 11) = 29.3938, p-val = 0.0020
+    ## QE(df = 11) = 38.7572, p-val < .0001
     ## 
     ## Test of Moderators (coefficient(s) 2:10): 
-    ## QM(df = 9) = 30.2877, p-val = 0.0004
+    ## QM(df = 9) = 22.7784, p-val = 0.0067
     ## 
     ## Model Results:
     ## 
     ##             estimate      se     zval    pval    ci.lb    ci.ub     
-    ## intrcpt      -1.5718  0.5202  -3.0214  0.0025  -2.5914  -0.5522   **
-    ## testeNTT      0.6872  0.4064   1.6909  0.0909  -0.1093   1.4838    .
-    ## testePAv      0.8064  0.7083   1.1385  0.2549  -0.5819   2.1947     
-    ## testeShoal    0.3923  0.6404   0.6126  0.5401  -0.8629   1.6475     
-    ## conc          1.0094  0.2223   4.5405  <.0001   0.5737   1.4451  ***
-    ## t.trat       -0.0156  0.0295  -0.5268  0.5984  -0.0734   0.0423     
-    ## t.abst        0.0009  0.0011   0.7771  0.4371  -0.0013   0.0031     
-    ## strainBSF     1.0510  0.5410   1.9428  0.0520  -0.0093   2.1112    .
-    ## strainSF      0.9629  0.6541   1.4720  0.1410  -0.3192   2.2450     
-    ## strainWT     -0.9593  0.4293  -2.2346  0.0254  -1.8006  -0.1179    *
+    ## intrcpt      -0.2899  0.6292  -0.4608  0.6450  -1.5230   0.9432     
+    ## testeNTT      0.8838  0.4950   1.7854  0.0742  -0.0864   1.8540    .
+    ## testePAv      0.4273  0.8655   0.4938  0.6215  -1.2690   2.1237     
+    ## testeShoal   -0.5890  0.7768  -0.7582  0.4483  -2.1114   0.9334     
+    ## strainBSF    -0.2586  0.6579  -0.3930  0.6943  -1.5481   1.0309     
+    ## strainSF      1.0435  0.8051   1.2961  0.1949  -0.5345   2.6214     
+    ## strainWT     -1.8813  0.5245  -3.5868  0.0003  -2.9093  -0.8533  ***
+    ## conc          0.6865  0.2704   2.5388  0.0111   0.1565   1.2165    *
+    ## t.trat       -0.0392  0.0362  -1.0834  0.2786  -0.1102   0.0317     
+    ## t.abst        0.0011  0.0014   0.7695  0.4416  -0.0017   0.0038     
     ## 
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -480,21 +530,21 @@ permres
 
     ## 
     ## Test of Moderators (coefficient(s) 2:10): 
-    ## QM(df = 9) = 30.2877, p-val* = 0.0250
+    ## QM(df = 9) = 22.7784, p-val* = 0.0640
     ## 
     ## Model Results:
     ## 
     ##             estimate      se     zval   pval*    ci.lb    ci.ub    
-    ## intrcpt      -1.5718  0.5202  -3.0214  0.0140  -2.5914  -0.5522   *
-    ## testeNTT      0.6872  0.4064   1.6909  0.1090  -0.1093   1.4838    
-    ## testePAv      0.8064  0.7083   1.1385  0.2750  -0.5819   2.1947    
-    ## testeShoal    0.3923  0.6404   0.6126  0.5560  -0.8629   1.6475    
-    ## conc          1.0094  0.2223   4.5405  0.0030   0.5737   1.4451  **
-    ## t.trat       -0.0156  0.0295  -0.5268  0.6070  -0.0734   0.0423    
-    ## t.abst        0.0009  0.0011   0.7771  0.4540  -0.0013   0.0031    
-    ## strainBSF     1.0510  0.5410   1.9428  0.0730  -0.0093   2.1112   .
-    ## strainSF      0.9629  0.6541   1.4720  0.1840  -0.3192   2.2450    
-    ## strainWT     -0.9593  0.4293  -2.2346  0.0530  -1.8006  -0.1179   .
+    ## intrcpt      -0.2899  0.6292  -0.4608  0.7100  -1.5230   0.9432    
+    ## testeNTT      0.8838  0.4950   1.7854  0.1000  -0.0864   1.8540   .
+    ## testePAv      0.4273  0.8655   0.4938  0.6390  -1.2690   2.1237    
+    ## testeShoal   -0.5890  0.7768  -0.7582  0.4500  -2.1114   0.9334    
+    ## strainBSF    -0.2586  0.6579  -0.3930  0.7020  -1.5481   1.0309    
+    ## strainSF      1.0435  0.8051   1.2961  0.2340  -0.5345   2.6214    
+    ## strainWT     -1.8813  0.5245  -3.5868  0.0030  -2.9093  -0.8533  **
+    ## conc          0.6865  0.2704   2.5388  0.0230   0.1565   1.2165   *
+    ## t.trat       -0.0392  0.0362  -1.0834  0.2880  -0.1102   0.0317    
+    ## t.abst        0.0011  0.0014   0.7695  0.4400  -0.0017   0.0038    
     ## 
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -511,113 +561,198 @@ regtest(res.mod1, model="lm")
     ## model:     weighted regression with multiplicative dispersion
     ## predictor: standard error
     ## 
-    ## test for funnel plot asymmetry: t = -2.8920, df = 10, p = 0.0161
+    ## test for funnel plot asymmetry: t = -0.0064, df = 10, p = 0.9950
 
-Influential studies analysis; generated Table S1
+Influential studies analysis; generated Figure S1
 
 ``` r
-influence(res.mod1) 
+influence(res.mod1)
 ```
 
     ## $inf
-    ##                            rstudent  dffits  cook.d    cov.r tau2.del
-    ## Holcombe et al., 2013       -1.2507 -1.9328  3.6577   2.7839   0.3465
-    ## Tran et al., 2015            1.4137  1.5582  2.1935   0.8741   0.3086
-    ## Mathur et al., 2011.1       -0.4758 -0.2513  0.0672   2.5380   0.3938
-    ## Mathur et al., 2011.2        0.9501  0.6117  0.3810   1.7215   0.3680
-    ## Pittman et al., 2015         0.2484  0.1915  0.0421   4.5762   0.4191
-    ## Cachat et al., 2010          0.3452  0.3411  0.1309   5.7274   0.4197
-    ## Gerlai et al., 2009.1       -0.8837 -0.9093  0.8474   2.7047   0.3721
-    ## Gerlai et al., 2009.2        0.7769  0.7975  0.6735   3.4582   0.3864
-    ## Gerlai et al., 2009.3        0.0274  0.0463  0.0046  12.1657   0.4301
-    ## Gerlai et al., 2009.4       -0.6365 -0.7535  0.6116   4.9208   0.3975
-    ## Gerlai et al., 2009.5       -0.0274 -0.0464  0.0046  12.2164   0.4301
-    ## Pittman & Ichikawa, 2013.1  -0.5647 -0.4282  0.1968   3.2022   0.3966
-    ## Pittman & Ichikawa, 2013.2   0.3549  0.3165  0.1104   4.6086   0.4092
-    ## Müller et al., 2017          0.8763  1.3444  1.8502   4.4367   0.3725
-    ## Mathur et al., 2011.3       -3.9728 -2.2973  2.9123   0.0001   0.0309
-    ## Mathur et al., 2011.4        0.8276  0.6049  0.3806   2.3514   0.3810
-    ## Benneh et al. 2017.1         0.4965  0.3611  0.1501   4.6935   0.4250
-    ## Benneh et al. 2017.2         1.2768  0.9125  0.7979   1.0594   0.3378
-    ## Benneh et al. 2017.3        -0.9668 -0.5863  0.3459   1.4680   0.3610
-    ## Benneh et al. 2017.4        -0.2535 -0.1668  0.0321   4.1236   0.4165
-    ## Dewari et al, 2016           0.4188  4.6861 24.7159 380.0511   0.4205
+    ##                            rstudent   dffits   cook.d    cov.r tau2.del
+    ## Holcombe et al., 2013        0.2102   0.3339   0.1287  12.2754   0.7349
+    ## Tran et al., 2015           -0.2482  -0.2727   0.0859   7.5030   0.7305
+    ## Mathur et al., 2011.1       -1.7246  -0.9736   0.8253   0.3001   0.5089
+    ## Mathur et al., 2011.2       -0.1913  -0.1384   0.0222   4.7306   0.7260
+    ## Pittman et al., 2015        -2.4353  -1.7944   2.0592   0.0116   0.3081
+    ## Cachat et al., 2010          0.4065   0.3872   0.1659   5.1998   0.7065
+    ## Gerlai et al., 2009.1        0.2124   0.2376   0.0644   7.4943   0.7315
+    ## Gerlai et al., 2009.2        0.2545   0.2473   0.0702   6.5138   0.7236
+    ## Gerlai et al., 2009.3       -0.5948  -0.9309   0.9571   8.7289   0.7017
+    ## Gerlai et al., 2009.4        0.1186   0.1436   0.0247   8.8385   0.7354
+    ## Gerlai et al., 2009.5        0.5948   0.9328   0.9613   8.7535   0.7017
+    ## Pittman & Ichikawa, 2013.1   0.5046   0.3847   0.1624   3.9529   0.7000
+    ## Pittman & Ichikawa, 2013.2   1.9173   1.7445   2.3541   0.1306   0.4330
+    ## Müller et al., 2017         -0.8234  -1.3092   1.7960   5.9517   0.6658
+    ## Mathur et al., 2011.3        2.8782   1.4200   1.5127   0.0104   0.3145
+    ## Mathur et al., 2011.4       -0.3528  -0.2747   0.0845   4.8063   0.7200
+    ## Benneh et al. 2017.1         0.0849   0.0540   0.0047   5.6514   0.7417
+    ## Benneh et al. 2017.2         0.6169   0.4301   0.2022   3.2635   0.6882
+    ## Benneh et al. 2017.3        -0.8414  -0.5197   0.2765   1.7874   0.6431
+    ## Benneh et al. 2017.4        -0.2638  -0.1728   0.0341   4.5346   0.7193
+    ## Dewari et al, 2016          -1.0637 -11.8511 145.1083 170.4868   0.6476
     ##                             QE.del    hat weight inf
-    ## Holcombe et al., 2013      26.4860 0.7050 5.1665   *
-    ## Tran et al., 2015          24.6316 0.5482 5.2697   *
-    ## Mathur et al., 2011.1      27.9798 0.2428 4.3231    
-    ## Mathur et al., 2011.2      27.4541 0.2922 4.3406    
-    ## Pittman et al., 2015       29.3161 0.3556 4.4578    
-    ## Cachat et al., 2010        29.2611 0.4807 4.6997    
-    ## Gerlai et al., 2009.1      27.2504 0.5137 4.3686    
-    ## Gerlai et al., 2009.2      27.6203 0.5130 5.2627    
-    ## Gerlai et al., 2009.3      29.3832 0.7114 5.2450    
-    ## Gerlai et al., 2009.4      28.0635 0.5836 4.9594    
-    ## Gerlai et al., 2009.5      29.3832 0.7127 5.2701    
-    ## Pittman & Ichikawa, 2013.1 28.1782 0.3702 4.6402    
-    ## Pittman & Ichikawa, 2013.2 28.5423 0.4590 4.6709    
-    ## Müller et al., 2017        27.2667 0.7010 4.0554    
-    ## Mathur et al., 2011.3      11.8491 0.2361 3.7113   *
-    ## Mathur et al., 2011.4      27.9742 0.3459 4.3406    
-    ## Benneh et al. 2017.1       29.2562 0.3116 5.6035    
-    ## Benneh et al. 2017.2       25.3750 0.3414 5.7146    
-    ## Benneh et al. 2017.3       27.0620 0.2688 4.1772    
-    ## Benneh et al. 2017.4       29.0896 0.3150 4.5099    
-    ## Dewari et al, 2016         29.3547 0.9922 5.2135   *
+    ## Holcombe et al., 2013      38.7564 0.7035 5.0827    
+    ## Tran et al., 2015          38.6401 0.5376 5.1491    
+    ## Mathur et al., 2011.1      31.9414 0.2566 4.5044    
+    ## Mathur et al., 2011.2      38.7482 0.2971 4.5171    
+    ## Pittman et al., 2015       25.0208 0.3591 4.6013   *
+    ## Cachat et al., 2010        37.7170 0.4841 4.7708    
+    ## Gerlai et al., 2009.1      38.7513 0.5266 4.5373    
+    ## Gerlai et al., 2009.2      37.8014 0.5047 5.1446    
+    ## Gerlai et al., 2009.3      37.4209 0.7091 5.1333    
+    ## Gerlai et al., 2009.4      38.7542 0.5835 4.9468    
+    ## Gerlai et al., 2009.5      37.4209 0.7100 5.1493    
+    ## Pittman & Ichikawa, 2013.1 37.7318 0.3691 4.7297    
+    ## Pittman & Ichikawa, 2013.2 28.6450 0.4590 4.7510   *
+    ## Müller et al., 2017        36.5753 0.7149 4.3062    
+    ## Mathur et al., 2011.3      25.8401 0.2084 3.2275   *
+    ## Mathur et al., 2011.4      38.6282 0.3520 4.5171    
+    ## Benneh et al. 2017.1       38.7569 0.3048 5.3577    
+    ## Benneh et al. 2017.2       36.1187 0.3326 5.4252    
+    ## Benneh et al. 2017.3       35.6361 0.2774 4.3973    
+    ## Benneh et al. 2017.4       38.0778 0.3177 4.6383    
+    ## Dewari et al, 2016         36.2632 0.9920 5.1131   *
     ## 
     ## $dfbs
-    ##                            intrcpt testeNTT testePAv testeShoal    conc
-    ## Holcombe et al., 2013       0.0016   0.6966   0.9363     1.0344  0.3963
-    ## Tran et al., 2015           0.0158   0.4333  -0.7657    -0.5296 -0.5246
-    ## Mathur et al., 2011.1      -0.1281  -0.1038  -0.0187     0.0044 -0.0298
-    ## Mathur et al., 2011.2       0.5295  -0.3427  -0.1566    -0.2225  0.0734
-    ## Pittman et al., 2015       -0.0689   0.0796   0.0186     0.0124  0.1105
-    ## Cachat et al., 2010         0.0230   0.1571   0.0446    -0.0276 -0.0374
-    ## Gerlai et al., 2009.1       0.1874   0.0043  -0.4160    -0.1463  0.2346
-    ## Gerlai et al., 2009.2       0.1224   0.0001   0.4941     0.0874  0.0742
-    ## Gerlai et al., 2009.3       0.0176   0.0255   0.0212    -0.0069 -0.0067
-    ## Gerlai et al., 2009.4      -0.0350   0.0407   0.0770    -0.4255  0.1163
-    ## Gerlai et al., 2009.5       0.0176   0.0255   0.0212    -0.0069 -0.0067
-    ## Pittman & Ichikawa, 2013.1  0.2036  -0.1205  -0.0226    -0.0225 -0.2900
-    ## Pittman & Ichikawa, 2013.2 -0.0125  -0.1504  -0.0663    -0.0777  0.1959
-    ## Müller et al., 2017        -0.0242   0.0681   0.5993     0.9160  0.3993
-    ## Mathur et al., 2011.3      -1.3886  -1.1564  -0.5368    -0.1592 -0.1665
-    ## Mathur et al., 2011.4       0.5324  -0.3125  -0.0427    -0.1382  0.1128
-    ## Benneh et al. 2017.1        0.0490   0.1766  -0.0024     0.0402 -0.1873
-    ## Benneh et al. 2017.2        0.1544   0.3865   0.1086     0.1871 -0.3964
-    ## Benneh et al. 2017.3       -0.2933   0.3312   0.2188     0.1516  0.2620
-    ## Benneh et al. 2017.4       -0.0813   0.1149   0.0443     0.0290  0.0524
-    ## Dewari et al, 2016         -0.6749   0.1538   0.1235     0.1141  0.1596
-    ##                             t.trat  t.abst strainBSF strainSF strainWT
-    ## Holcombe et al., 2013      -1.0151  0.8831   -1.0998  -0.0767  -0.2128
-    ## Tran et al., 2015           1.0595 -1.2255   -0.4889  -0.2994  -0.2865
-    ## Mathur et al., 2011.1       0.0847 -0.0214    0.0935   0.0305   0.1747
-    ## Mathur et al., 2011.2      -0.1619  0.0754   -0.2546  -0.0788  -0.3761
-    ## Pittman et al., 2015        0.0157 -0.0207    0.0049   0.0041   0.0276
-    ## Cachat et al., 2010        -0.0670  0.0265    0.2170   0.0439  -0.0313
-    ## Gerlai et al., 2009.1      -0.1934  0.1425   -0.0541   0.2991  -0.4566
-    ## Gerlai et al., 2009.2      -0.0256 -0.0099   -0.1471  -0.3934  -0.2670
-    ## Gerlai et al., 2009.3      -0.0194  0.0111   -0.0138   0.0259  -0.0097
-    ## Gerlai et al., 2009.4      -0.2203  0.2307    0.2808   0.3920   0.0524
-    ## Gerlai et al., 2009.5      -0.0194  0.0111   -0.0138  -0.0293  -0.0097
-    ## Pittman & Ichikawa, 2013.1 -0.0717  0.0623   -0.0600  -0.0179  -0.0775
-    ## Pittman & Ichikawa, 2013.2  0.0476 -0.0261    0.0036   0.0033   0.0432
-    ## Müller et al., 2017        -0.5995  0.6133    0.6801  -0.2281  -0.0663
-    ## Mathur et al., 2011.3       1.3749 -0.8252    0.9686   0.2133   1.4963
-    ## Mathur et al., 2011.4      -0.3057  0.2483   -0.2152  -0.0481  -0.3684
-    ## Benneh et al. 2017.1       -0.0460  0.0017   -0.0447   0.0202   0.1726
-    ## Benneh et al. 2017.2       -0.3047  0.2414   -0.0395   0.0958   0.4346
-    ## Benneh et al. 2017.3        0.0226 -0.0166    0.0805  -0.0263  -0.2831
-    ## Benneh et al. 2017.4        0.0339 -0.0442    0.0026  -0.0160  -0.0779
-    ## Dewari et al, 2016          0.4178  1.6447    0.1478  -0.0360  -0.1362
+    ##                            intrcpt testeNTT testePAv testeShoal strainBSF
+    ## Holcombe et al., 2013      -0.0194  -0.1317  -0.1671    -0.1758    0.1977
+    ## Tran et al., 2015          -0.0215  -0.0907   0.1210     0.0877    0.0952
+    ## Mathur et al., 2011.1      -0.5031  -0.4352  -0.0860     0.0037    0.3797
+    ## Mathur et al., 2011.2      -0.1216   0.0568   0.0232     0.0456    0.0619
+    ## Pittman et al., 2015        0.8789  -0.4966  -0.0764    -0.1133   -0.2702
+    ## Cachat et al., 2010         0.0014   0.1498   0.0350    -0.0404    0.2826
+    ## Gerlai et al., 2009.1      -0.0597  -0.0123   0.0955     0.0364    0.0234
+    ## Gerlai et al., 2009.2       0.0236  -0.0158   0.1506     0.0270   -0.0347
+    ## Gerlai et al., 2009.3      -0.0447  -0.0185  -0.2931     0.2017   -0.0913
+    ## Gerlai et al., 2009.4      -0.0077  -0.0180  -0.0232     0.0797   -0.0437
+    ## Gerlai et al., 2009.5      -0.0447  -0.0185  -0.2931     0.2017   -0.0913
+    ## Pittman & Ichikawa, 2013.1 -0.1822   0.1110   0.0177     0.0213    0.0503
+    ## Pittman & Ichikawa, 2013.2 -0.1029  -0.8849  -0.3737    -0.4355    0.0696
+    ## Müller et al., 2017         0.0167  -0.0606  -0.5740    -0.8806   -0.6467
+    ## Mathur et al., 2011.3       0.8496   0.6207   0.3555     0.1042   -0.5286
+    ## Mathur et al., 2011.4      -0.2405   0.1235   0.0088     0.0594    0.1002
+    ## Benneh et al. 2017.1       -0.0106   0.0124  -0.0102     0.0075    0.0077
+    ## Benneh et al. 2017.2        0.0678   0.1856   0.0476     0.0920   -0.0175
+    ## Benneh et al. 2017.3       -0.2604   0.2816   0.1913     0.1308    0.0703
+    ## Benneh et al. 2017.4       -0.1118   0.0834   0.0312     0.0274    0.0283
+    ## Dewari et al, 2016          1.7439  -0.3476  -0.3030    -0.2865   -0.4097
+    ##                            strainSF strainWT    conc  t.trat  t.abst
+    ## Holcombe et al., 2013        0.0145   0.0602 -0.0712  0.1898 -0.1610
+    ## Tran et al., 2015            0.0550   0.0737  0.0871 -0.1628  0.1972
+    ## Mathur et al., 2011.1        0.1202   0.6342 -0.0790  0.3366 -0.0887
+    ## Mathur et al., 2011.2        0.0183   0.1006 -0.0214  0.0461 -0.0235
+    ## Pittman et al., 2015        -0.0757  -0.4440 -1.1537 -0.3407  0.2950
+    ## Cachat et al., 2010          0.0575  -0.0115 -0.0401 -0.0518  0.0160
+    ## Gerlai et al., 2009.1       -0.0715   0.1351 -0.0640  0.0610 -0.0439
+    ## Gerlai et al., 2009.2       -0.1232  -0.0648  0.0218  0.0078 -0.0130
+    ## Gerlai et al., 2009.3       -0.6284   0.1214 -0.1180  0.1462 -0.1349
+    ## Gerlai et al., 2009.4       -0.0706   0.0151 -0.0296  0.0567 -0.0538
+    ## Gerlai et al., 2009.5        0.5714   0.1214 -0.1180  0.1462 -0.1349
+    ## Pittman & Ichikawa, 2013.1   0.0157   0.0842  0.2451  0.0662 -0.0586
+    ## Pittman & Ichikawa, 2013.2   0.0272   0.1938  1.1200  0.2800 -0.1439
+    ## Müller et al., 2017          0.2157   0.0733 -0.3881  0.5779 -0.5907
+    ## Mathur et al., 2011.3       -0.1176  -1.0639  0.2580 -0.8542  0.5465
+    ## Mathur et al., 2011.4        0.0224   0.1815 -0.0573  0.1431 -0.1148
+    ## Benneh et al. 2017.1         0.0061   0.0564 -0.0360  0.0102 -0.0106
+    ## Benneh et al. 2017.2         0.0470   0.2198 -0.1947 -0.1391  0.1102
+    ## Benneh et al. 2017.3        -0.0247  -0.2506  0.2346  0.0231 -0.0158
+    ## Benneh et al. 2017.4        -0.0130  -0.0560  0.0605  0.0609 -0.0597
+    ## Dewari et al, 2016           0.0878   0.3540 -0.4340 -1.0723 -4.1780
+
+Sensitivity analysis
+
+``` r
+res.mod2 <- rma(yi, vi, mods = ~ teste + conc + t.trat + t.abst + strain + RoB, data = mod1, slab=paste(study))
+summary(res.mod1)
+```
+
+    ## 
+    ## Mixed-Effects Model (k = 21; tau^2 estimator: REML)
+    ## 
+    ##   logLik  deviance       AIC       BIC      AICc  
+    ## -15.4654   30.9308   52.9308   57.3076  316.9308  
+    ## 
+    ## tau^2 (estimated amount of residual heterogeneity):     0.6221 (SE = 0.3568)
+    ## tau (square root of estimated tau^2 value):             0.7887
+    ## I^2 (residual heterogeneity / unaccounted variability): 75.72%
+    ## H^2 (unaccounted variability / sampling variability):   4.12
+    ## R^2 (amount of heterogeneity accounted for):            48.29%
+    ## 
+    ## Test for Residual Heterogeneity: 
+    ## QE(df = 11) = 38.7572, p-val < .0001
+    ## 
+    ## Test of Moderators (coefficient(s) 2:10): 
+    ## QM(df = 9) = 22.7784, p-val = 0.0067
+    ## 
+    ## Model Results:
+    ## 
+    ##             estimate      se     zval    pval    ci.lb    ci.ub     
+    ## intrcpt      -0.2899  0.6292  -0.4608  0.6450  -1.5230   0.9432     
+    ## testeNTT      0.8838  0.4950   1.7854  0.0742  -0.0864   1.8540    .
+    ## testePAv      0.4273  0.8655   0.4938  0.6215  -1.2690   2.1237     
+    ## testeShoal   -0.5890  0.7768  -0.7582  0.4483  -2.1114   0.9334     
+    ## strainBSF    -0.2586  0.6579  -0.3930  0.6943  -1.5481   1.0309     
+    ## strainSF      1.0435  0.8051   1.2961  0.1949  -0.5345   2.6214     
+    ## strainWT     -1.8813  0.5245  -3.5868  0.0003  -2.9093  -0.8533  ***
+    ## conc          0.6865  0.2704   2.5388  0.0111   0.1565   1.2165    *
+    ## t.trat       -0.0392  0.0362  -1.0834  0.2786  -0.1102   0.0317     
+    ## t.abst        0.0011  0.0014   0.7695  0.4416  -0.0017   0.0038     
+    ## 
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+``` r
+summary(res.mod2)
+```
+
+    ## 
+    ## Mixed-Effects Model (k = 21; tau^2 estimator: REML)
+    ## 
+    ##   logLik  deviance       AIC       BIC      AICc  
+    ## -14.4313   28.8627   52.8627   56.4937  364.8627  
+    ## 
+    ## tau^2 (estimated amount of residual heterogeneity):     0.7070 (SE = 0.4129)
+    ## tau (square root of estimated tau^2 value):             0.8408
+    ## I^2 (residual heterogeneity / unaccounted variability): 77.99%
+    ## H^2 (unaccounted variability / sampling variability):   4.54
+    ## R^2 (amount of heterogeneity accounted for):            41.23%
+    ## 
+    ## Test for Residual Heterogeneity: 
+    ## QE(df = 10) = 38.1234, p-val < .0001
+    ## 
+    ## Test of Moderators (coefficient(s) 2:11): 
+    ## QM(df = 10) = 21.2697, p-val = 0.0193
+    ## 
+    ## Model Results:
+    ## 
+    ##             estimate      se     zval    pval    ci.lb    ci.ub     
+    ## intrcpt       0.7676  1.8953   0.4050  0.6855  -2.9471   4.4823     
+    ## testeNTT      1.0549  0.5905   1.7864  0.0740  -0.1025   2.2122    .
+    ## testePAv      0.7182  1.0299   0.6973  0.4856  -1.3004   2.7367     
+    ## testeShoal   -0.3581  0.9047  -0.3958  0.6922  -2.1314   1.4151     
+    ## conc          0.5388  0.3799   1.4184  0.1561  -0.2058   1.2834     
+    ## t.trat       -0.0431  0.0385  -1.1201  0.2627  -0.1184   0.0323     
+    ## t.abst        0.0013  0.0015   0.8471  0.3969  -0.0017   0.0042     
+    ## strainBSF    -0.3910  0.7229  -0.5409  0.5886  -1.8078   1.0258     
+    ## strainSF      1.1104  0.8556   1.2978  0.1944  -0.5666   2.7873     
+    ## strainWT     -1.8719  0.5510  -3.3973  0.0007  -2.9519  -0.7920  ***
+    ## RoB          -0.0767  0.1299  -0.5905  0.5549  -0.3313   0.1779     
+    ## 
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Forest plot (Figure 1A)
 
 ``` r
-forest(res.mod1)
+par(mar=c(4,1,3,1))
+forest(res.mod1, cex = 0.68)
+text(-11, 25, "Author(s) and Year", pos = 1, cex = 0.75, font = 4)
+text(13, 25, "SMD [95% CI]", pos = 1, cex = 0.75, font = 4)
 ```
 
-![](etoh-withdrawal-metanalysis-notebook_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-8-1.png)
+![](etoh-withdrawal-metanalysis-notebook_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-10-1.png)
 
 Generate histogram for the permutation distribution of the test statistic for EtOH concentration (Figure 1B)
 
@@ -632,7 +767,7 @@ lines(density(permres$zval.perm[,5]), lwd = 2,
 col = rgb(0, 0, 1, alpha = 0.7))
 ```
 
-![](etoh-withdrawal-metanalysis-notebook_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-9-1.png)
+![](etoh-withdrawal-metanalysis-notebook_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-11-1.png)
 
 Generate histogram for the permutation distributoin of the test statistic for exposure time (Figure 1C)
 
@@ -647,7 +782,7 @@ lines(density(permres$zval.perm[,6]), lwd = 2,
 col = rgb(0, 0, 1, alpha = 0.7))
 ```
 
-![](etoh-withdrawal-metanalysis-notebook_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-10-1.png)
+![](etoh-withdrawal-metanalysis-notebook_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-12-1.png)
 
 Generate histogram for the permutation distributoin of the test statistic for withdrawal duration (Figure 1D)
 
@@ -662,7 +797,7 @@ lines(density(permres$zval.perm[,7]), lwd = 2,
 col = rgb(0, 0, 1, alpha = 0.7))
 ```
 
-![](etoh-withdrawal-metanalysis-notebook_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-11-1.png)
+![](etoh-withdrawal-metanalysis-notebook_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-13-1.png)
 
 Funnel plot (Figure 1E)
 
@@ -670,7 +805,37 @@ Funnel plot (Figure 1E)
 funnel(res.mod1, level=c(90, 95, 99), shade=c("white", "gray", "darkgray"), refline = 0)
 ```
 
-![](etoh-withdrawal-metanalysis-notebook_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-12-1.png)
+![](etoh-withdrawal-metanalysis-notebook_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-14-1.png)
+
+Fit loess line to plot of power vs. SMD (Figure S2)
+
+``` r
+ggplot(mod1, aes(power, abs(yi))) + geom_point() + geom_smooth(formula = y ~ x, method="loess", fullrange = FALSE) + labs(y = "Modulus of SMD", x = "Observed power")
+```
+
+![](etoh-withdrawal-metanalysis-notebook_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-15-1.png)
+
+``` r
+summary(gam(abs(mod1$yi) ~ mod1$power))
+```
+
+    ## 
+    ## Family: gaussian 
+    ## Link function: identity 
+    ## 
+    ## Formula:
+    ## abs(mod1$yi) ~ mod1$power
+    ## 
+    ## Parametric coefficients:
+    ##             Estimate Std. Error t value Pr(>|t|)  
+    ## (Intercept)   0.4489     0.2699   1.663   0.1127  
+    ## mod1$power    1.2819     0.4918   2.606   0.0174 *
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## 
+    ## R-sq.(adj) =  0.225   Deviance explained = 26.3%
+    ## GCV = 0.83386  Scale est. = 0.75444   n = 21
 
 [1] Universidade Federal do Sul e Sudeste do Pará
 
